@@ -9,7 +9,7 @@ Both the module and cli version of this tool utilize `node` as a runtime. Be sur
 ### Usage
 To use the cli tool, located in the `corpus-search-cli.js` file, run the following command. Note this command will be using the `samples/` directory, but can be swapped out to use any other directory containing text files.
 ```
-node ./samples sea whale queequeg
+node corpus-search-cli.js ./samples sea whale queequeg
 ```
 The first argument to the cli tool is the directory containing your text files. This can have as many text files located in it as you'd like. The subsequent arguments are the terms to search for. You can pass in as many terms as you like, separated by spaces.
 
