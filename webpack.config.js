@@ -1,15 +1,12 @@
 const path = require('path');
 const webpack = require('webpack');
-const PUBLIC_DIR = path.join(__dirname, 'public');
-const SRC_DIR = path.join(__dirname, 'src');
 
 module.exports = {
   context: __dirname,
   entry: "./src/app.js",
   output: {
-    path: path.resolve(__dirname, 'public'),
+    path: path.join(__dirname, 'public'),
     filename: "bundle.js",
-    publicPath: path.join(__dirname, 'public')
   },
   module: {
     loaders: [
@@ -24,6 +21,17 @@ module.exports = {
       {
         test: /\.scss$/,
         loader: 'style-loader!css-loader!sass-loader?sourceMap'
+      },
+      {
+        test: /\.css$/,
+        use: [ 'style-loader', 'css-loader' ]
+      },
+      {
+        test: /\.(png|jp(e*)g|svg)$/,
+        loader: 'url-loader',
+        options: {
+          limit: 8192,
+        },
       }
     ]
   },

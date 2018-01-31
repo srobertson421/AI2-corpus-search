@@ -38,18 +38,22 @@ module.exports = function searchCorpus(termArr, callback) {
         const contentsFlattened = contents.replace(/[\.,-\/#!$%\^&\*;:{}=\-_`~()@\+\?><\[\]\+]/g, '').toLowerCase().split(' ');
         TFReport[filePath.fileName].docLength = contentsFlattened.length;
 
-        contentsFlattened.forEach(content => {
-          words.forEach(word => {
-            if(word === content) {
-              TFReport[filePath.fileName].terms[word] += 1;
-            }
-          });
-        });
-
-        TFReport[filePath.fileName].finished = true;
-        checkComplete();
+        countTerms(contentsFlattened, filePath);
       });
     });
+  }
+
+  function countTerms(contentsFlattened, filePath) {
+    contentsFlattened.forEach(content => {
+      words.forEach(word => {
+        if(word === content) {
+          TFReport[filePath.fileName].terms[word] += 1;
+        }
+      });
+    });
+
+    TFReport[filePath.fileName].finished = true;
+    checkComplete();
   }
 
   function checkComplete() {

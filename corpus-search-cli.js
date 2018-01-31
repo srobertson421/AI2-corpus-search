@@ -1,28 +1,37 @@
 const path = require('path');
 const fs = require('fs');
 
+// Singleton for state during async operations
 const TFReport = {};
 
 // Check for arguments
+// Directory of docs should always be the first arg
 if(process.argv.length <= 2) {
   console.log('Please include arguments to this script');
   process.exit(-1);
 }
 
+// Create absolute path to directory
 const dirPath = path.resolve(process.argv[2]);
+
+// Generate array of words passed as args
 const words = process.argv.slice(3);
 
+// Read files list from directory path
 fs.readdir(dirPath, (err, files) => {
   if(err) {
     console.log('Error with directory read - make sure to provide a directory', err);
     process.exit(-1);
   }
 
+  // Generate state structure via files found
   files.forEach(file => {
     TFReport[file] = {terms: {}, finished: false};
     words.forEach(word => TFReport[file].terms[word] = 0)
   });
 
+  // Create new array with absolute file paths and names
+  // then pass into readFiles()
   const filesArr = files.map(file => ({fullPath: `${dirPath}/${file}`, fileName: file}));
   readFiles(filesArr);
 });
@@ -43,18 +52,22 @@ function readFiles(filesArr) {
       const contentsFlattened = contents.replace(/[\.,-\/#!$%\^&\*;:{}=\-_`~()@\+\?><\[\]\+]/g, '').toLowerCase().split(' ');
       TFReport[filePath.fileName].docLength = contentsFlattened.length;
 
-      contentsFlattened.forEach(content => {
-        words.forEach(word => {
-          if(word === content) {
-            TFReport[filePath.fileName].terms[word] += 1;
-          }
-        });
-      });
-
-      TFReport[filePath.fileName].finished = true;
-      checkComplete();
+      countTerms(contentsFlattened, filePath);
     });
   });
+}
+
+function countTerms(contentsFlattened, filePath) {
+  contentsFlattened.forEach(content => {
+    words.forEach(word => {
+      if(word === content) {
+        TFReport[filePath.fileName].terms[word] += 1;
+      }
+    });
+  });
+
+  TFReport[filePath.fileName].finished = true;
+  checkComplete();
 }
 
 function checkComplete() {

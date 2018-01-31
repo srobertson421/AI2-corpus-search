@@ -5,7 +5,7 @@ import ResultListItem from '../ResultListItem';
 function renderResults(results) {
   return Object.keys(results).map(key => {
     const result = results[key];
-    return <ResultListItem key={key} result={result} />
+    return <ResultListItem key={key} result={result} docName={key} />
   });
 }
 

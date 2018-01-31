@@ -11,7 +11,7 @@ class Search extends Component {
   handleSearch(e) {
     e.preventDefault();
 
-    const searchTerms = [e.target.search.value];
+    const searchTerms = e.target.search.value.replace(/[\.-\/#!$%\^&\*;:{}=\-_`~()@\+\?><\s\[\]\+]/g, '').toLowerCase().split(',');
 
     axios.post('/search', { searchTerms }).then(response => {
       this.props.handleSearchResults(response.data);
@@ -21,7 +21,7 @@ class Search extends Component {
   render() {
     return (
       <form onSubmit={this.handleSearch}>
-        <input type="text" name="search" placeholder="Enter search term" />
+        <input type="text" name="search" placeholder="Enter search terms - separate multiple with commas" />
         <button type="submit">Search</button>
       </form>
     )
