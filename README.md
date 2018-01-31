@@ -7,7 +7,7 @@ Term frequency search for use with a corpus of text documents
 Both the module and cli version of this tool utilize `node` as a runtime. Be sure to have `node` v7 or above installed. You can install node from this the Node.js site: [Node](https://nodejs.org/en/). There are also versions available via `apt-get` on Ubuntu and `brew` on Mac OS. Be sure to install `npm` as well.
 
 ### Usage
-To use the cli tool, located in the `corpus-search-cli.js` file, run the following command. Note this command will be using the `samples/` directory, can be swapped out to use any other directory containing text files.
+To use the cli tool, located in the `corpus-search-cli.js` file, run the following command. Note this command will be using the `samples/` directory, but can be swapped out to use any other directory containing text files.
 ```
 node ./samples sea whale queequeg
 ```
