@@ -107,5 +107,5 @@ function scoreSearch() {
     });
   });
 
-  console.log(results);
+  console.log(JSON.stringify(results));
 }
