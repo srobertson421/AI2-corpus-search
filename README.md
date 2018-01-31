@@ -33,6 +33,7 @@ The output of the cli tool should reflect this JSON structure where the key is t
 ```
 
 ## Web Application
+A deployed version of the web application can be found [here](https://ai2-corpus-search.herokuapp.com/).
 
 ### Installation
 To run the Node/Express/React web application you need to install the dependencies listed in `package.json` using the command:
