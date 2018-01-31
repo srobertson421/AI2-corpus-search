@@ -41,6 +41,7 @@ function readFiles(filesArr) {
       }
 
       const contentsFlattened = contents.replace(/[\.,-\/#!$%\^&\*;:{}=\-_`~()@\+\?><\[\]\+]/g, '').toLowerCase().split(' ');
+      TFReport[filePath.fileName].docLength = contentsFlattened.length;
 
       contentsFlattened.forEach(content => {
         words.forEach(word => {
@@ -76,16 +77,17 @@ function scoreSearch() {
     Object.keys(TFReport).forEach(key => {
       const doc = TFReport[key];
       const termCount = doc.terms[word];
+      const score = termCount / doc.docLength;
       if(results[word]) {
         if(results[word].score < termCount) {
           results[word] = {
-            score: termCount,
+            score,
             file: key,
           }
         }
       } else {
         results[word] = {
-          score: termCount,
+          score,
           file: key,
         }
       }
