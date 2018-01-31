@@ -1,17 +1,11 @@
 const path = require('path');
 const fs = require('fs');
 
-module.exports = function searchCorpus(callback) {
+module.exports = function searchCorpus(termArr, callback) {
   const TFReport = {};
 
-  // Check for arguments
-  if(process.argv.length <= 2) {
-    console.log('Please include arguments to this script');
-    process.exit(-1);
-  }
-
-  const dirPath = path.resolve(process.argv[2]);
-  const words = process.argv.slice(3);
+  const dirPath = path.resolve('samples');
+  const words = termArr;
 
   fs.readdir(dirPath, (err, files) => {
     if(err) {
