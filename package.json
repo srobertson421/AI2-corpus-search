@@ -1,0 +1,23 @@
+{
+  "name": "ai2-corpus-search",
+  "version": "0.0.1",
+  "description": "Search a series of documents for Term Frequency",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/srobertson421/AI2-corpus-search.git"
+  },
+  "author": "srobertson421",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/srobertson421/AI2-corpus-search/issues"
+  },
+  "homepage": "https://github.com/srobertson421/AI2-corpus-search#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2"
+  }
+}
