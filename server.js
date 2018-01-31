@@ -1,10 +1,14 @@
 const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
-const webpack = require('webpack');
-const config = require('./webpack.config.js');
+
+if(process.env.NODE_ENV === 'development') {
+  const webpack = require('webpack');
+  const config = require('./webpack.config.js');
+  const compiler = webpack(config);
+}
+
 const app = express();
-const compiler = webpack(config);
 
 const searchCorpus = require('./corpus-search-module');
 
@@ -13,7 +17,9 @@ const PORT = process.env.PORT || 3000;
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
-app.use(require('webpack-dev-middleware')(compiler));
+if(process.env.NODE_ENV === 'development') {
+  app.use(require('webpack-dev-middleware')(compiler));
+}
 
 app.use(express.static(path.join(__dirname, 'public')));
 
