@@ -45,3 +45,12 @@ npm install
 Run `npm start` to run the server in development mode. Then open a web browser and navigate to [http://localhost:3000](http://localhost:3000) to view the React front-end. You may use the search bar to search the `samples/` directory with as many terms as you'd like, separated by commas.
 
 The results of the search should show below the search field. Each result will contain the word, the TF score, and the filename which had that score. The results are also links that when clicked will open a new tab showing the scored text file.
+
+## Go CLI Tool
+
+There is a version of the cli tool built in Golang as well located in the `go-version/` directory. Simply run the following command to run the Go version:
+```
+./go-version/corpus-search --dir ./samples sea whale queequeg
+```
+
+The source code is located in the `go-version/corpus-search.go` file. To build make sure to have Go installed and in your PATH then run `go build corpus-search.go`.
